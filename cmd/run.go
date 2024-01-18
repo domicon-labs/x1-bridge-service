@@ -291,6 +291,10 @@ func startServer(ctx *cli.Context, opts ...runOptionFunc) error {
 	// ---------- Run xxl-jobs executor ----------
 	if opt.runXxlJobs {
 		xxljobs.InitExecutor(c.XxlJobExecutor)
+
+		xxljobs.RegisterTask("task.task1", xxljobs.Task1)
+		xxljobs.RegisterTask("task2", xxljobs.Task2)
+		xxljobs.RegisterTask("panic-task", xxljobs.TaskPanic)
 		// TODO: Register tasks
 	}
 
