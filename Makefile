@@ -57,6 +57,7 @@ STOP_JSON_RPC := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_RPC) && $(DOCKER_COMPOS
 STOP_SYNC := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_SYNC) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_SYNC)
 STOP_ETH_TX_MANAGER := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_ETH_TX_MANAGER) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_ETH_TX_MANAGER)
 STOP_NETWORK := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_L1_NETWORK) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_L1_NETWORK)
+STOP_COIN_KAFKA := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_COIN_KAFKA_NODE) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_COIN_KAFKA_NODE)
 STOP_ZKPROVER := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_ZKPROVER) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_ZKPROVER)
 STOP_BRIDGE := $(DOCKER_COMPOSE) stop $(DOCKER_COMPOSE_BRIDGE) && $(DOCKER_COMPOSE) rm -f $(DOCKER_COMPOSE_BRIDGE)
 STOP := $(DOCKER_COMPOSE) down --remove-orphans
@@ -125,6 +126,14 @@ run-dbs: ## Runs the node database
 stop-dbs: ## Stops the node database
 	$(STOP_DBS)
 
+.PHONY: run-coin-kafka
+run-coin-kafka: ## Runs the coin kafka
+	$(RUN_COIN_KAFKA)
+
+.PHONY: stop-coin-kafka
+stop-coin-kafka: ## Stops the coin kafka
+	$(STOP_COIN_KAFKA)
+
 .PHONY: run-node
 run-node: ## Runs the node
 	$(RUN_ETH_TX_MANAGER)
@@ -173,6 +182,9 @@ stop-bridge: ## Stops the bridge service
 .PHONY: stop
 stop: ## Stops all services
 	$(STOP)
+
+.PHONY: restart-bridge
+restart-bridge: stop-bridge run-bridge ## Restarts the bridge service Executes `make stop-bridge` and `make run-bridge` commands
 
 .PHONY: restart
 restart: stop run ## Executes `make stop` and `make run` commands

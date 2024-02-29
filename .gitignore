@@ -16,6 +16,7 @@
 /dist/
 .vscode
 .idea
+.fleet
 
 config/config.mainnet.toml
 config/config.testnet.toml
