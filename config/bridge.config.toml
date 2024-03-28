@@ -1,0 +1,81 @@
+[Log]
+Level = "debug"
+Outputs = ["stdout"]
+
+[SyncDB]
+Database = "postgres"
+User = "test_user"
+Password = "test_password"
+Name = "test_db"
+Host = "x1-bridge-db"
+Port = "5432"
+MaxConns = 20
+TableSuffix = ""
+
+[ClaimTxManager]
+Enabled = true
+FrequencyToMonitorTxs = "5s"
+PrivateKey = {Path = "/pk/keystore.claimtxmanager", Password = "Ryoshi"}
+RetryInterval = "10s"
+RetryNumber = 40
+FreeGas = true
+
+[Etherman]
+L1URL = "http://sepolia.shibchain.io:8545"
+L2URLs = ["http://3.91.48.119:8123"]
+L1ChainId = 11155111
+L2ChainIds = [11198111]
+
+[Synchronizer]
+SyncInterval = "1s"
+SyncChunkSize = 100
+
+[BridgeController]
+Store = "postgres"
+Height = 32
+
+[BridgeServer]
+GRPCPort = "9090"
+HTTPPort = "8080"
+CacheSize = 100000
+DefaultPageLimit = 25
+MaxPageLimit = 100
+BridgeVersion = "v1"
+SentinelConfigFilePath = "/app/sentinel_config.json"
+    [BridgeServer.DB]
+    Database = "postgres"
+    User = "test_user"
+    Password = "test_password"
+    Name = "test_db"
+    Host = "x1-bridge-db"
+    Port = "5432"
+    MaxConns = 20
+    TableSuffix = ""
+    [BridgeServer.Redis]
+    IsClusterMode = false
+    Addrs = ["x1-bridge-redis:6379"]
+    Username = ""
+    Password = ""
+    DB = 0
+    MockPrice = true
+
+[CoinKafkaConsumer]
+Brokers = ["x1-bridge-coin-kafka:9092"]
+Topics = ["explorer_chainAddressPrice_push"]
+ConsumerGroupID = "x1-bridge-service"
+InitialOffset = -1
+Username = ""
+Password = ""
+RootCAPath = "/app/root-ca-cert"
+
+[NetworkConfig]
+GenBlockNumber = 5575687
+PolygonBridgeAddress = "0x7874aae070d58702dFd7B81e3c3Eed774665c836"
+PolygonZkEVMGlobalExitRootAddress = "0x3F7C86731D3cf980Fd7a090A6535E4E5e5eF1101"
+L2PolygonBridgeAddresses = ["0x7874aae070d58702dFd7B81e3c3Eed774665c836"]
+
+[NacosConfig]
+NacosUrls = ""
+NamespaceId = "public"
+ApplicationName = ""
+ExternalListenAddr = "127.0.0.1:26659"

@@ -339,8 +339,8 @@ services:
       - ZKEVM_BRIDGE_DATABASE_HOST=x1-bridge-db
       - ZKEVM_BRIDGE_DATABASE_PORT=5432
     volumes:
-      - ./test/test.keystore.claimtx:/pk/keystore.claimtxmanager
-      - ./config/config.local.toml:/app/config.toml
+      - ./config/sequencer.keystore:/pk/keystore.claimtxmanager
+      - ./config/bridge.config.toml:/app/config.toml
       - ./sentinel/config.json:/app/sentinel_config.json
       - ./coinmiddleware/root-ca-cert:/app/root-ca-cert
     command:

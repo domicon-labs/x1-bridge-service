@@ -196,21 +196,7 @@ run: stop ## runs all services
 	$(RUN_ZOOKEEPER)
 	sleep 3
 	$(RUN_COIN_KAFKA)
-	$(RUN_L1_NETWORK)
-	sleep 5
-	$(RUN_ZKPROVER)
 	sleep 3
-	$(RUN_DA)
-	sleep 3
-	$(RUN_SYNC)
-	sleep 2
-	$(RUN_ETH_TX_MANAGER)
-	$(RUN_SEQUENCER)
-	$(RUN_SEQUENCE_SENDER)
-	$(RUN_L2_GAS_PRICER)
-	$(RUN_AGGREGATOR)
-	$(RUN_JSON_RPC)
-	sleep 7
 	$(RUN_BRIDGE)
 
 .PHONY: update-external-dependencies
